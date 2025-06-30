@@ -13,24 +13,8 @@ class ShortLinkIntegrationTest extends KernelTestCase
         return \WechatMiniProgramShortLinkBundle\Tests\Integration\IntegrationTestKernel::class;
     }
 
-    public function testBundleAndServiceRegistration(): void
-    {
-        self::markTestSkipped('此测试需要依赖其他模块，暂时跳过');
-        
-        $kernel = self::bootKernel();
-        $container = $kernel->getContainer();
-
-        // 验证容器已正确创建
-        $this->assertNotNull($container);
-    }
-
     public function testShortLinkRequestCanBeInstantiated(): void
     {
-        self::markTestSkipped('此测试需要依赖其他模块，暂时跳过');
-        
-        $kernel = self::bootKernel();
-        $container = $kernel->getContainer();
-
         // 手动创建 ShortLinkRequest 对象
         $request = new ShortLinkRequest();
 
