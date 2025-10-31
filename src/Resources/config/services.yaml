@@ -4,5 +4,5 @@ services:
     autowire: true      # Automatically injects dependencies in your services.
     autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
-#  WechatMiniProgramShortLinkBundle\Procedure\:
-#    resource: '../../Procedure/'
+  # Request 类是数据传输对象(DTO)，不需要注册为服务
+  # 应该直接使用 new 实例化

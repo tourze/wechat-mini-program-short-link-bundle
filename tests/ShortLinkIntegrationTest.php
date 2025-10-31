@@ -1,21 +1,23 @@
 <?php
 
-namespace WechatMiniProgramShortLinkBundle\Tests\Integration;
+declare(strict_types=1);
 
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+namespace WechatMiniProgramShortLinkBundle\Tests;
+
+use HttpClientBundle\Tests\Request\RequestTestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 use WechatMiniProgramBundle\Entity\Account;
 use WechatMiniProgramShortLinkBundle\Request\ShortLinkRequest;
 
-class ShortLinkIntegrationTest extends KernelTestCase
+/**
+ * @internal
+ */
+#[CoversClass(ShortLinkRequest::class)]
+final class ShortLinkIntegrationTest extends RequestTestCase
 {
-    protected static function getKernelClass(): string
-    {
-        return \WechatMiniProgramShortLinkBundle\Tests\Integration\IntegrationTestKernel::class;
-    }
-
     public function testShortLinkRequestCanBeInstantiated(): void
     {
-        // 手动创建 ShortLinkRequest 对象
+        // 直接实例化 ShortLinkRequest，因为它是数据传输对象(DTO)
         $request = new ShortLinkRequest();
 
         // 测试设置属性并获取请求选项
@@ -47,7 +49,7 @@ class ShortLinkIntegrationTest extends KernelTestCase
         $request = new ShortLinkRequest();
         $request->setPageUrl('pages/product/detail?id=123');
         $request->setPageTitle('中文标题测试');
-        
+
         $expectedOptions = [
             'json' => [
                 'page_url' => 'pages/product/detail?id=123',
@@ -55,14 +57,14 @@ class ShortLinkIntegrationTest extends KernelTestCase
                 'is_permanent' => false,
             ],
         ];
-        
+
         $this->assertEquals($expectedOptions, $request->getRequestOptions());
     }
 
     public function testShortLinkRequestWithEmptyValues(): void
     {
         $request = new ShortLinkRequest();
-        
+
         $expectedOptions = [
             'json' => [
                 'page_url' => '',
@@ -70,7 +72,7 @@ class ShortLinkIntegrationTest extends KernelTestCase
                 'is_permanent' => false,
             ],
         ];
-        
+
         $this->assertEquals($expectedOptions, $request->getRequestOptions());
     }
-} 
+}

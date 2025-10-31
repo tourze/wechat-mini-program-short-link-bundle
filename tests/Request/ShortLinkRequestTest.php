@@ -1,17 +1,26 @@
 <?php
 
-namespace WechatMiniProgramShortLinkBundle\Tests\Unit\Request;
+declare(strict_types=1);
 
-use PHPUnit\Framework\TestCase;
+namespace WechatMiniProgramShortLinkBundle\Tests\Request;
+
+use HttpClientBundle\Tests\Request\RequestTestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 use WechatMiniProgramBundle\Request\WithAccountRequest;
 use WechatMiniProgramShortLinkBundle\Request\ShortLinkRequest;
 
-class ShortLinkRequestTest extends TestCase
+/**
+ * @internal
+ */
+#[CoversClass(ShortLinkRequest::class)]
+final class ShortLinkRequestTest extends RequestTestCase
 {
     private ShortLinkRequest $request;
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         $this->request = new ShortLinkRequest();
     }
 
@@ -25,7 +34,7 @@ class ShortLinkRequestTest extends TestCase
         $this->assertEquals('/wxa/genwxashortlink', $this->request->getRequestPath());
     }
 
-    public function testGetRequestOptions_WithDefaultValues(): void
+    public function testGetRequestOptionsWithDefaultValues(): void
     {
         $expectedOptions = [
             'json' => [
@@ -38,7 +47,7 @@ class ShortLinkRequestTest extends TestCase
         $this->assertEquals($expectedOptions, $this->request->getRequestOptions());
     }
 
-    public function testGetRequestOptions_WithCustomValues(): void
+    public function testGetRequestOptionsWithCustomValues(): void
     {
         $this->request->setPageUrl('pages/index/index');
         $this->request->setPageTitle('首页');
@@ -88,17 +97,17 @@ class ShortLinkRequestTest extends TestCase
         $this->assertFalse($this->request->isPermanent());
     }
 
-    public function testGetSetPageUrl_WithSpecialCharacters(): void
+    public function testGetSetPageUrlWithSpecialCharacters(): void
     {
         $specialUrl = 'pages/index/index?id=123&name=测试';
         $this->request->setPageUrl($specialUrl);
         $this->assertEquals($specialUrl, $this->request->getPageUrl());
     }
 
-    public function testGetSetPageTitle_WithSpecialCharacters(): void
+    public function testGetSetPageTitleWithSpecialCharacters(): void
     {
         $specialTitle = '测试标题 123 !@#$%^&*()_+';
         $this->request->setPageTitle($specialTitle);
         $this->assertEquals($specialTitle, $this->request->getPageTitle());
     }
-} 
+}

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace WechatMiniProgramShortLinkBundle\Request;
 
 use WechatMiniProgramBundle\Request\WithAccountRequest;
@@ -23,6 +25,9 @@ class ShortLinkRequest extends WithAccountRequest
         return '/wxa/genwxashortlink';
     }
 
+    /**
+     * @return array<string, mixed>|null
+     */
     public function getRequestOptions(): ?array
     {
         return [
