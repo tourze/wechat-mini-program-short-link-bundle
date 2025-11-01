@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace WechatMiniProgramShortLinkBundle\Tests;
 
-use HttpClientBundle\Tests\Request\RequestTestCase;
+use HttpClientBundle\Test\RequestTestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use WechatMiniProgramBundle\Entity\Account;
 use WechatMiniProgramShortLinkBundle\Request\ShortLinkRequest;
