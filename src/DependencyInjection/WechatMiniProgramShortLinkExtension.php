@@ -6,7 +6,7 @@ namespace WechatMiniProgramShortLinkBundle\DependencyInjection;
 
 use Tourze\SymfonyDependencyServiceLoader\AutoExtension;
 
-class WechatMiniProgramShortLinkExtension extends AutoExtension
+final class WechatMiniProgramShortLinkExtension extends AutoExtension
 {
     protected function getConfigDir(): string
     {
